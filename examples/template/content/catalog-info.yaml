@@ -1,3 +1,4 @@
+---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -6,3 +7,13 @@ spec:
   type: service
   owner: user:guest
   lifecycle: experimental
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: example-python-template
+  description: Template para aplicação Python (Django, FastAPI ou Flask)
+spec:
+  type: template
+  lifecycle: experimental
+  owner: user:guest

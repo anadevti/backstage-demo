@@ -61,7 +61,7 @@ spec:
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}?ref=main
         catalogInfoPath: '/catalog-info.yaml'
 
   # Outputs are displayed to the user after a successful execution of the template.
@@ -72,3 +72,86 @@ spec:
       - title: Open in catalog
         icon: catalog
         entityRef: ${{ steps['register'].output.entityRef }}
+---
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: example-python-template
+  title: Example Python Template
+  description: Um template para criar serviços Python utilizando Django, FastAPI ou Flask
+spec:
+  owner: user:guest
+  type: service
+
+  # Parâmetros que serão exibidos no formulário da interface do Backstage
+  parameters:
+    - title: Informações do Componente
+      required:
+        - name
+        - framework
+      properties:
+        name:
+          title: Nome
+          type: string
+          description: Nome único do componente Python
+          ui:autofocus: true
+          ui:options:
+            rows: 1
+        framework:
+          title: Framework Python
+          type: string
+          description: Selecione o framework para sua aplicação
+          enum:
+            - django
+            - fastapi
+            - flask
+    - title: Escolha um Repositório
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Localização do Repositório
+          type: string
+          description: Endereço do repositório onde o novo projeto será criado
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+
+  # Etapas que serão executadas no backend do scaffolder utilizando os parâmetros coletados
+  steps:
+    # Etapa para buscar a estrutura base do projeto Python, dependendo do framework selecionado
+    - id: fetch-base
+      name: Buscar Template Base
+      action: fetch:template
+      input:
+        url: ./content/${{ parameters.framework }}
+        values:
+          name: ${{ parameters.name }}
+
+    # Etapa que publica o conteúdo gerado em um repositório do GitHub
+    - id: publish
+      name: Publicar no GitHub
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: Este é o projeto ${{ parameters.name }} utilizando ${{ parameters.framework }}
+        repoUrl: ${{ parameters.repoUrl }}
+
+    # Etapa que registra o novo componente no catálogo do Backstage
+    - id: register
+      name: Registrar Componente
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}?ref=main
+        catalogInfoPath: '/catalog-info.yaml'
+
+  # Saídas exibidas para o usuário após a execução bem-sucedida do template
+  output:
+    links:
+      - title: Repositório
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Abrir no catálogo
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
+---
