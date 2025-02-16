@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ${{ values.name }}
+  description: Serviço Python gerado com o template ${{ parameters.framework }}
+spec:
+  type: service
+  owner: user:guest
+  lifecycle: experimental
