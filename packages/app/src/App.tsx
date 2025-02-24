@@ -37,6 +37,11 @@ import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 
+// Importando o ThemeProvider e CssBaseline para aplicar o tema em toda a app
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import myTheme from './theme/myTheme';
+
 const app = createApp({
   apis,
   bindRoutes({ bind }) {
@@ -99,11 +104,12 @@ const routes = (
 );
 
 export default app.createRoot(
-  <>
+  <ThemeProvider theme={myTheme}>
+    <CssBaseline />
     <AlertDisplay />
     <OAuthRequestDialog />
     <AppRouter>
       <Root>{routes}</Root>
     </AppRouter>
-  </>,
+  </ThemeProvider>,
 );
