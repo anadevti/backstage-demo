@@ -6,12 +6,10 @@ organization:
   name: Lab da Aninha
 
 backend:
-  # Used for enabling authentication, secret is shared by all backend plugins
-  # See https://backstage.io/docs/auth/service-to-service-auth for
-  # information on the format
-  # auth:
-  #   keys:
-  #     - secret: ${BACKEND_SECRET}
+  reading:
+    allow:
+      - host: 'github.com'
+
   baseUrl: http://localhost:7007
   listen:
     port: 7007
@@ -70,15 +68,16 @@ techdocs:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 
 auth:
+  # see https://backstage.io/docs/auth/ to learn about auth providers
   environment: development
   providers:
     github:
       development:
-        clientId: AUTH_GITHUB_CLIENT_ID
-        clientSecret: AUTH_GITHUB_CLIENT_SECRET
-    guest:
-      development:
-        allow: true
+        clientId: GITHUB_CLIENT_ID
+        clientSecret: GITHUB_CLIENT_SECRET
+        signIn:
+          resolvers:
+            - resolver: usernameMatchingUserEntityName
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
@@ -88,7 +87,7 @@ catalog:
     entityFilename: catalog-info.yaml
     pullRequestBranchName: backstage-integration
   rules:
-    - allow: [Component, System, API, Resource, Location]
+    - allow: [Component, System, API, Resource, Location, Group, User]
   locations:
     # Local example data, file locations are relative to the backend process, typically `packages/backend`
     - type: file
@@ -119,6 +118,30 @@ catalog:
     #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
     #   rules:
     #     - allow: [User, Group]
+
+  experimental:
+    # Auto discovering all plugins extensions
+    packages: all
+  extensions:
+    # Enabling some entity cards
+    # The cards will be displayed in the same order it appears in this setting list
+    # Shows a table of components that provides a particular api
+    - entity-card:api-docs/providing-components:
+        config:
+          # Presenting the card ony for entites of kind api
+          filter: kind:api
+    # Shows a table of components that consumes a particular api
+    - entity-card:api-docs/consuming-components:
+        config:
+          # Presenting the card ony for entites of kind api
+          filter: kind:api
+    # Enabling some contents
+    # The contents will be displayed in the same order it appears in this setting list
+    # Shows a "Definition" tab for entities of kind api
+    - entity-content:api-docs/definition
+    # Shows an "Apis" tab for entities of kind component
+    - entity-content:api-docs/apis
+
 
 kubernetes:
   # see https://backstage.io/docs/features/kubernetes/configuration for kubernetes configuration options

@@ -291,6 +291,7 @@ const apiPage = (
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <EntityApiDefinitionCard />
+          
         </Grid>
       </Grid>
     </EntityLayout.Route>
