@@ -13,9 +13,11 @@
     "lint": "backstage-cli package lint",
     "test": "backstage-cli package test",
     "clean": "backstage-cli package clean",
-    "build-image": "docker build ../.. -f Dockerfile --tag backstage"
+    "build-image": "docker build ../.. -f Dockerfile --tag backstage",
+    "migrate": "backstage-cli database migrate"
   },
   "dependencies": {
+    "@backstage/backend-common": "^0.25.0",
     "@backstage/backend-defaults": "^0.7.0",
     "@backstage/config": "^1.3.2",
     "@backstage/plugin-app-backend": "^0.4.4",
