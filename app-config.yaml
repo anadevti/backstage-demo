@@ -27,7 +27,7 @@ backend:
   # The production database configuration is stored in app-config.production.yaml
   database:
     client: pg
-    connection: "postgresql://backstage:backstage@localhost:5432/backstage_plugin_app"
+    connection: 'postgresql://backstage:backstage@localhost:5432/backstage_plugin_app'
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 events:
@@ -50,15 +50,15 @@ integrations:
 
 proxy:
   '/api/pagerduty':
-      target: https://api.pagerduty.com
-      changeOrigin: true
-      secure: false
-      pathRewrite:
-        '^/api/pagerduty': ''
+    target: https://api.pagerduty.com
+    changeOrigin: true
+    secure: false
+    pathRewrite:
+      '^/api/pagerduty': ''
 
 pagerDuty:
   accountId: ''
-  apiToken: PD_TOKEN
+  apiToken: API_TOKEN
   # Endpoints (normalmente não é preciso mudar):
   eventsBaseUrl: 'https://events.pagerduty.com/v2'
   restBaseUrl: 'https://api.pagerduty.com'
@@ -82,8 +82,8 @@ auth:
   providers:
     github:
       development:
-        clientId: GITHUB_CLIENT_ID
-        clientSecret: GITHUB_CLIENT_SECRET
+        clientId: CLIENT_ID
+        clientSecret: CLIENT_SECRET
         signIn:
           resolvers:
             - resolver: usernameMatchingUserEntityName
@@ -150,7 +150,6 @@ catalog:
     - entity-content:api-docs/definition
     # Shows an "Apis" tab for entities of kind component
     - entity-content:api-docs/apis
-
 
 kubernetes:
   # see https://backstage.io/docs/features/kubernetes/configuration for kubernetes configuration options
