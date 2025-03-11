@@ -63,6 +63,10 @@ import {
   isGithubActionsAvailable,
 } from '@backstage-community/plugin-github-actions';
 
+import {
+  isPluginApplicableToEntity as isPagerDutyAvailable,
+  EntityPagerDutyCard,
+} from '@pagerduty/backstage-plugin';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -138,6 +142,15 @@ const overviewContent = (
     <Grid item md={6} xs={12}>
       <EntityCatalogGraphCard variant="gridItem" height={400} />
     </Grid>
+
+    <EntitySwitch>
+  <EntitySwitch.Case if={isPagerDutyAvailable}>
+    <Grid item md={6}>
+      <EntityPagerDutyCard />
+    </Grid>
+  </EntitySwitch.Case>
+</EntitySwitch>
+
 
     <Grid item md={4} xs={12}>
       <EntityLinksCard />

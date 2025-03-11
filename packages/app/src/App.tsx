@@ -42,6 +42,7 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import myTheme from './theme/myTheme';
+import { Notifications } from './components/notifications/notifications';
 
 const app = createApp({
   apis,
@@ -115,6 +116,7 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
+    <Route path="/notifications" Component={Notifications} />
   </FlatRoutes>
 );
 

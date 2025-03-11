@@ -32,4 +32,7 @@ backend.add(import('@backstage/plugin-search-backend-module-pg'));
 backend.add(import('@backstage/plugin-search-backend-module-catalog'));
 backend.add(import('@backstage/plugin-search-backend-module-techdocs'));
 
+//pd plugin
+// pageduty plugin
+backend.add(import('@pagerduty/backstage-plugin-backend'));
 backend.start();
