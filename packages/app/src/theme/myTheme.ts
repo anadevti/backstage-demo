@@ -10,7 +10,7 @@ const myTheme = createBackstageTheme({
     ...lightTheme.palette,
     type: 'dark', // Define o tema como escuro
     primary: {
-      main: '#BB86FC', // Roxo claro e vibrante
+      main: '#64ffda', // Verde-água
       contrastText: '#000000', // Texto preto para contraste
     },
     secondary: {
