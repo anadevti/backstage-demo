@@ -49,16 +49,16 @@ integrations:
     #   token: ${GHE_TOKEN}
 
 proxy:
-  '/api/pagerduty':
-    target: https://api.pagerduty.com
-    changeOrigin: true
-    secure: false
-    pathRewrite:
-      '^/api/pagerduty': ''
+  #'/api/pagerduty':
+   # target: https://api.pagerduty.com
+    #changeOrigin: true
+    #secure: false
+    #pathRewrite:
+     # '^/api/pagerduty': ''
 
 pagerDuty:
   accountId: ''
-  apiToken: API_TOKEN
+  apiToken: TOKEN_PD
   # Endpoints (normalmente não é preciso mudar):
   eventsBaseUrl: 'https://events.pagerduty.com/v2'
   restBaseUrl: 'https://api.pagerduty.com'
@@ -82,8 +82,8 @@ auth:
   providers:
     github:
       development:
-        clientId: CLIENT_ID
-        clientSecret: CLIENT_SECRET
+        clientId: CLIENT_ID_GH
+        clientSecret:  CLIENT_SECRET_GH
         signIn:
           resolvers:
             - resolver: usernameMatchingUserEntityName

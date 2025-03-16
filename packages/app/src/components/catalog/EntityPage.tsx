@@ -67,6 +67,20 @@ import {
   isPluginApplicableToEntity as isPagerDutyAvailable,
   EntityPagerDutyCard,
 } from '@pagerduty/backstage-plugin';
+import { EntityGithubPullRequestsContent } from '@roadiehq/backstage-plugin-github-pull-requests';
+import { EntityGithubPullRequestsOverviewCard } from '@roadiehq/backstage-plugin-github-pull-requests';
+import {
+  EntityGithubInsightsContent,
+  EntityGithubInsightsLanguagesCard,
+  EntityGithubInsightsReadmeCard,
+  EntityGithubInsightsReleasesCard,
+  isGithubInsightsAvailable,
+  } from '@roadiehq/backstage-plugin-github-insights';
+  import { ShouldIDeployCard } from 'backstage-plugin-should-i-deploy';
+  import {
+    EntityAWSLambdaOverviewCard,
+    isAWSLambdaAvailable,
+  } from '@roadiehq/backstage-plugin-aws-lambda';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -142,7 +156,6 @@ const overviewContent = (
     <Grid item md={6} xs={12}>
       <EntityCatalogGraphCard variant="gridItem" height={400} />
     </Grid>
-
     <EntitySwitch>
   <EntitySwitch.Case if={isPagerDutyAvailable}>
     <Grid item md={6}>
@@ -150,13 +163,13 @@ const overviewContent = (
     </Grid>
   </EntitySwitch.Case>
 </EntitySwitch>
-
-
     <Grid item md={4} xs={12}>
       <EntityLinksCard />
     </Grid>
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
+
+      
     </Grid>
   </Grid>
 );
@@ -165,6 +178,9 @@ const serviceEntityPage = (
   <EntityLayout>
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/pull-requests" title="Pull Requests">
+      <EntityGithubPullRequestsContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
@@ -211,6 +227,16 @@ const websiteEntityPage = (
   <EntityLayout>
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route 
+      path="/code-insights"
+      title="Code Insights">
+      <EntityGithubInsightsContent />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/pull-requests" title="Pull Requests">
+      <EntityGithubPullRequestsContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">

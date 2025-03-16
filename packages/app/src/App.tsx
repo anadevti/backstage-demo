@@ -43,6 +43,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import myTheme from './theme/myTheme';
 import { Notifications } from './components/notifications/notifications';
+import { ShouldIDeployPage } from 'backstage-plugin-should-i-deploy';
 
 const app = createApp({
   apis,
@@ -86,6 +87,7 @@ const routes = (
   <FlatRoutes>
     <Route path="/" element={<Navigate to="catalog" />} />
     <Route path="/catalog" element={<CatalogIndexPage />} />
+    <Route path="/should-i-deploy" element={<ShouldIDeployPage />} />
     <Route
       path="/catalog/:namespace/:kind/:name"
       element={<CatalogEntityPage />}

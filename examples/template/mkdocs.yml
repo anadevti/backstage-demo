@@ -1,0 +1,4 @@
+site_name: Criar instância na AWS EC2
+docs_dir: docs
+plugins:
+  - techdocs-core

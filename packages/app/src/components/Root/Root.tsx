@@ -31,6 +31,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import { MyGroupsSidebarItem } from '@backstage/plugin-org';
 import { useLocation } from 'react-router-dom';
+import WhatshotTwoToneIcon from '@mui/icons-material/WhatshotTwoTone';
 
 // Importação do componente Notifications
 import { Notifications } from '../notifications/notifications';
@@ -71,6 +72,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => {
       <Sidebar>
         <SidebarLogo />
         <SidebarGroup label="Search" icon={<SearchIcon />} to="/search">
+        <SidebarGroup label="Deploy" icon={<SearchIcon />} to="/should-i-deploy"></SidebarGroup>
           <SidebarSearchModal />
         </SidebarGroup>
         <SidebarDivider />
@@ -86,6 +88,8 @@ export const Root = ({ children }: PropsWithChildren<{}>) => {
           <SidebarItem icon={ArticleTwoToneIcon} to="docs" text="Docs" />
           <SidebarItem icon={AddCircleOutlineIcon} to="create" text="Create" />
           <SidebarItem icon={AppRegistrationIcon} to="catalog-import" text="Register" />
+          <SidebarItem icon={WhatshotTwoToneIcon} to="should-i-deploy" text="Deploy Today?" />
+          
           <SidebarItem
             icon={NotificationsActiveTwoToneIcon}
             to="notifications"

@@ -53,7 +53,7 @@ export const Notifications = () => {
     setLoading(true);
     fetch('https://api.pagerduty.com/incidents', {
       headers: {
-        'Authorization': `Token token=API token`,
+        'Authorization': `Token token=TOKEN_PD`,
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Content-Type': 'application/json'
       }
@@ -78,7 +78,7 @@ export const Notifications = () => {
     setOnCallLoading(true);
     fetch('https://api.pagerduty.com/oncalls', {
       headers: {
-        'Authorization': `Token token=Token oncall`,
+        'Authorization': `Token token=TOKEN_PD_ONCALL`,
         'Accept': 'application/vnd.pagerduty+json;version=2',
         'Content-Type': 'application/json'
       }
@@ -122,7 +122,7 @@ export const Notifications = () => {
   }, []);
 
   const getAlertUrl = (alert: PagerDutyAlert) => {
-    return `https://pagerduty.com/incidents/${alert.id}`;
+    return `https://aninhadev.pagerduty.com/incidents/${alert.id}`;
   };
 
   // Ordena os alertas por data de criação (crescente)
@@ -334,5 +334,5 @@ export const Notifications = () => {
 )}
       </CardContent>
     </Card>
-  );
+  );s
 } 
